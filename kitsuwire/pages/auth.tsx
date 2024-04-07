@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import router from "next/router";
 
 const Auth = () => {
     const [email, setEmail] = useState('');
@@ -23,8 +24,10 @@ const Auth = () => {
             await signIn('credentials', {
                 email,
                 password,
-                callbackUrl: '/profiles'
+                redirect: false,
+                callbackUrl: '/'
             });
+            router.push('/profiles');
         } 
         catch (error) 
         {
@@ -86,7 +89,7 @@ const Auth = () => {
                             />
                         </div>
                         <button onClick={variant === 'login' ? login : register} className="bg-orange-600 py-3 text-white rounded-md w-full mt-10 hover:bg-orange-700 transition">
-                            {variant === 'login' ? 'Login' : 'Sing up'}
+                            {variant === 'login' ? 'Login' : 'Sign up'}
                         </button>
                         <div className="flex flex-row items-center gap-4 mt-8 justify-center">
                             <div
